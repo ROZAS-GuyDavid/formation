@@ -15,6 +15,7 @@ class AlterPostsTable extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             $table->unsignedInteger('category_id')->nullable();
+            // Laravel donnera le nom suivant posts_category_id_foreign à sa contrainte
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('SET NULL');
         });
     }
@@ -27,7 +28,8 @@ class AlterPostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            //
+            $table->dropForeign('posts_category_id_foreign');
+            $table->dropColumn('category_id');
         });
     }
 }
