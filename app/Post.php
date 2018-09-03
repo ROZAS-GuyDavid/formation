@@ -24,17 +24,20 @@ class Post extends Model
     // date_begin 
     public function getDateBeginAttribute($value)
     {
-        return Carbon::parse($value)->format('d/m/Y');
+        return Carbon::parse($value)->format('d-m-Y');
     }
 
     public function getDateEndAttribute($value)
     {
-        return Carbon::parse($value)->format('d/m/Y');
+        return Carbon::parse($value)->format('d-m-Y');
     }
 
     public function scopeFuturFormationStage($query){
         $now = Carbon::now();
 
         return $query->where('date_begin', '>', $now)->orderBy('date_begin', 'ASC');
+    }
+    public function scopePublished($query){
+        return $query->where('status', 'published');
     }
 }

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Post;
 use App\Picture;
 use App\category;
+use Carbon\Carbon;
+use Storage;
 
 class PostController extends Controller
 {
@@ -42,12 +44,12 @@ class PostController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|string|max:100',
-            'description' => 'required|string|max:100',
+            'description' => 'required|string|max:255',
             'post_type' => 'in:stage,formation,undetermined',
             'max_stud' => 'integer',
             'date_begin' => 'date',
             'date_end' => 'date',
-            'price' => 'integer',
+            'price' => 'numeric',
             'category_id' => 'integer',
             'status' => 'in:published,unpublished',
             'picture' => 'image|max:3000',
@@ -94,7 +96,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::pluck('title', 'id')->all();
+        $post = Post::find($id);
+        $date_begin =  Carbon::parse($post->date_begin)->format('Y-m-d');
+        $date_end =  Carbon::parse($post->date_end)->format('Y-m-d');
+        return view('back.post.edit', ['post' => $post, 'category' => $category, 'date_begin' => $date_begin, 'date_end' => $date_end]);
     }
 
     /**
@@ -106,7 +112,44 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|string|max:100',
+            'description' => 'required|string|max:255',
+            'post_type' => 'in:stage,formation,undetermined',
+            'max_stud' => 'integer',
+            'date_begin' => 'date',
+            'date_end' => 'date',
+            'price' => 'numeric',
+            'category_id' => 'integer',
+            'status' => 'in:published,unpublished',
+            'picture' => 'image|max:3000',
+        ]);
+
+        $post = Post::find($id); // associé les fillables
+
+        $post->update($request->all());
+        
+        // image
+        $im = $request->file('picture');
+
+        if(!empty($im)){
+
+            $link = $im->store('images');
+
+            // suppression de l'image si elle existe 
+            if(is_null($post->picture)==false){
+                Storage::disk('local')->delete($post->picture->link); // supprimer physiquement l'image
+                $post->picture()->delete(); // supprimer l'information en base de données
+            }
+
+            $post->picture()->create([
+                'title' => $request->title_image?? $request->title,
+                'link' => $link
+            ]);
+        }
+
+        return redirect()->route('post.index')->with('message', 'success');
+        // dump($request->all());
     }
 
     /**

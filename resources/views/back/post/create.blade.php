@@ -77,11 +77,6 @@
                             @endforeach
                         </select>
                     </div>
-
-                    <!-- 
-                    a faire:
-                        category
-                    -->
             </div>
             <div class="col-md-6">
                 <button type="submit" class="btn btn-primary">Ajouter un post</button>

@@ -8,13 +8,13 @@
         <link href="{{asset('css/app.css')}}" rel="stylesheet">
     </head>
     <body class="d-flex flex-column" style="min-height: 100vh;">
-        <div class="flex-grow-1">
+        <div class="flex-grow-1 d-flex flex-column">
             <div class="row">
                 <div class="col-md-12">
                     @include('partials.menu')
                 </div>
             </div>
-            <div class="row">
+            <div class="row flex-grow-1">
                 <div class="container">
                     @yield('content')
                 </div>

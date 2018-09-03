@@ -21,7 +21,8 @@ class FrontController extends Controller
         // $posts = Cache::remember($path, 60*24, function(){
         //     return Book::unpublished()->with('picture','category')->paginate(5);
         // });
-        $posts = Post::futurFormationStage()->with('picture','category')->limit(2)->get();
+        $posts = Post::published()->futurFormationStage()->with('picture','category')->limit(2)->get();
+        // rien ne saffichera si il n'y a pas de post anteriéure a aujourd'hui avec le status plublished
 
         return view('front.index', ['posts' => $posts]); 
     }
@@ -33,13 +34,13 @@ class FrontController extends Controller
     }
 
     public function showStage(){
-        $posts = Post::where('post_type' , 'stage')->get();
+        $posts = Post::published()->where('post_type' , 'stage')->get();
 
         return view('front.stage', ['posts' => $posts]); 
     }
 
     public function showFormation(){
-        $posts = Post::where('post_type' , 'formation')->get();
+        $posts = Post::published()->where('post_type' , 'formation')->get();
 
         return view('front.formation', ['posts' => $posts]); 
     }
@@ -53,11 +54,11 @@ class FrontController extends Controller
         $query = $request->search;
 
         // requete 
-        $posts = Post::where('title', 'LIKE', '%' . $query . '%')
+        $posts = Post::published()->where('title', 'LIKE', '%' . $query . '%')
             ->orWhere('description', 'LIKE', '%' . $query . '%')
             ->orWhere('post_type', 'LIKE', '%' . $query . '%')
             ->paginate(10);
 
-        return view('front.search', ['posts' => $posts]); 
+        return view('front.search', ['posts' => $posts, 'query' => $query]); 
     }
 }
