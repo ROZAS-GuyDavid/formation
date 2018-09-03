@@ -8,6 +8,10 @@ use Carbon\Carbon;
 class Post extends Model
 {
 
+    protected $fillable = [
+        'title', 'description', 'post_type', 'max_stud','date_begin',"date_end","price","category_id","status"
+    ];
+
     public function category()
     {
         return $this->belongsTo(Category::class);

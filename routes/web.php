@@ -32,3 +32,8 @@ Route::get('stage', 'FrontController@showStage')->name('stage');
 Route::get('contact', 'FrontController@showContact')->name('contact');
 Route::get('search', 'FrontController@showSearch')->name('search');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('admin/post', 'PostController')->middleware('auth');
