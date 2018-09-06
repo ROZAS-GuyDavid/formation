@@ -10,17 +10,6 @@ use App\Picture;
 class FrontController extends Controller
 {
     public function index(){
-        // $posts = Post::all(); // retourne tous les post de l'application
-        // $categorys = Category::all();
-        // return view('front.index', ['posts' => $posts, 'categorys' => $categorys]); 
-        
-
-        // $prefix = request()->page?? 'home';
-        // $path = 'post' . $prefix;
-
-        // $posts = Cache::remember($path, 60*24, function(){
-        //     return Book::unpublished()->with('picture','category')->paginate(5);
-        // });
         $posts = Post::published()->futurFormationStage()->with('picture','category')->limit(2)->get();
         // rien ne saffichera si il n'y a pas de post anteriéure a aujourd'hui avec le status plublished
 
