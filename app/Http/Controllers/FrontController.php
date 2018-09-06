@@ -23,13 +23,13 @@ class FrontController extends Controller
     }
 
     public function showStage(){
-        $posts = Post::published()->where('post_type' , 'stage')->get();
+        $posts = Post::published()->where('post_type' , 'stage')->with('picture','category')->get();
 
         return view('front.stage', ['posts' => $posts]); 
     }
 
     public function showFormation(){
-        $posts = Post::published()->where('post_type' , 'formation')->get();
+        $posts = Post::published()->where('post_type' , 'formation')->with('picture','category')->get();
 
         return view('front.formation', ['posts' => $posts]); 
     }
@@ -46,6 +46,7 @@ class FrontController extends Controller
         $posts = Post::published()->where('title', 'LIKE', '%' . $query . '%')
             ->orWhere('description', 'LIKE', '%' . $query . '%')
             ->orWhere('post_type', 'LIKE', '%' . $query . '%')
+            ->with('picture','category')
             ->paginate(10);
 
         return view('front.search', ['posts' => $posts, 'query' => $query]); 
