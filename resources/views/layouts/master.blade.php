@@ -11,7 +11,7 @@
         <div class="flex-grow-1 d-flex flex-column">
             <div class="row">
                 <div class="col-md-12">
-                    @include('partials.menu')
+                    @include('partials.menu-header')
                 </div>
             </div>
             <div class="row flex-grow-1">
@@ -23,13 +23,7 @@
         <footer  class="" style="height: 5%;">
             <div class="row">
                 <div class="col-md-12">
-                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                        <div class="container">
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                @include('partials.navbar')
-                            </div>
-                        </div>
-                    </nav>
+                    @include('partials.menu-footer')
                 </div>
             </div>
         </footer>
