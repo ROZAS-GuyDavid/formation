@@ -20,15 +20,15 @@
                     </li>
                 @endif
             </ul>
-            <form class="form-inline my-2 my-lg-0"  action="{{ route('search') }}" method="get">
-                <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            @if(Route::is('post.*') == false)
+                <form class="form-inline my-2 my-lg-0"  action="{{ route('search') }}" method="get">
+                    <input name="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            @endif
             <ul class="navbar-nav">
                 @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('login')}}">Login</a>
-                    </li>
+                
                 @else
                     <li class="nav-item ml-auto">
                         <a class="nav-link" href="{{ route('post.index') }}">{{ __('Dashboard') }}</a>
