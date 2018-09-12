@@ -22,3 +22,5 @@ Route::resource('admin/post', 'PostController')->middleware('auth');
 Route::get('/test-email', function(){
     return new ContactMessageCreated('rozasguydavid@gmail', 'mon premier message réussi');
 });
+
+Route::post('admin/post/del', 'PostController@del')->name('del');

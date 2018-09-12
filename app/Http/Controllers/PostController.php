@@ -164,4 +164,13 @@ class PostController extends Controller
         $post->delete();
         return redirect()->route('post.index')->with('message', 'success delete');
     }
+    
+    public function del(Request $request)
+    {
+        $delid = $request->input('delid');
+
+        $post = Post::where('id', $delid);
+        $post->delete();
+        return redirect()->route('post.index')->with('message', 'success delete');
+    }
 }
