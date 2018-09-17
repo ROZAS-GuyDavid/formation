@@ -165,11 +165,35 @@ class PostController extends Controller
         return redirect()->route('post.index')->with('message', 'success delete');
     }
     
-    public function del(Request $request)
+    public function deleteMultiple(Request $request)
     {
-        $delid = $request->input('delid');
+        $ids = $request->input('ids');
 
-        $post = Post::where('id', $delid);
+        // var_dump("Post.deleteMultiple()", $ids);
+        // exit();
+
+        $post = Post::where('id', $ids);
+        $post->delete();
+        return redirect()->route('post.index')->with('message', 'success delete');
+    }
+
+    public function archiveMultiple(Request $request)
+    {
+        $archiveIds = $request->input('ids');
+
+        // var_dump("Post.archiveMultiple()", $archiveIds);
+        // exit();
+
+        // $posts = Post::pluck('id')->where('id', $ids);
+        Post::whereIn('id', $archiveIds)
+                ->update(['status' => 'destroying']);
+        // return view('post.archiveMultiple');
+        return redirect()->route('post.index')->with('message', 'archivage des posts');
+    }
+
+    public function deleteSingle($id)
+    {
+        $post = Post::find($id);
         $post->delete();
         return redirect()->route('post.index')->with('message', 'success delete');
     }

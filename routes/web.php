@@ -23,4 +23,5 @@ Route::get('/test-email', function(){
     return new ContactMessageCreated('rozasguydavid@gmail', 'mon premier message réussi');
 });
 
-Route::post('admin/post/del', 'PostController@del')->name('del');
+Route::get('admin/post/deleteSingle/{id}', 'PostController@deleteSingle')->where(['id' => '[0-9]+'])->name('deleteSingle');
+Route::post('admin/post/archiveMultiple', 'PostController@archiveMultiple')->name('archiveMultiple');
