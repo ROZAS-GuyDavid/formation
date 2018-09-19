@@ -8,7 +8,6 @@ use App\Picture;
 use App\category;
 use Carbon\Carbon;
 use Storage;
-use Route;
 
 class PostController extends Controller
 {
@@ -71,8 +70,8 @@ class PostController extends Controller
                 'link' => $link
             ]);
         }
-
-        return redirect()->route('post.index')->with('message', 'success');
+        flashy('Votre post à bien été créer!');
+        return redirect()->route('post.index');
         // dump($request->all());
     }
 
@@ -148,9 +147,8 @@ class PostController extends Controller
                 'link' => $link
             ]);
         }
-
-        return redirect()->route('post.index')->with('message', 'success');
-        // dump($request->all());
+        flashy('Votre post à bien été mis à jour!');
+        return redirect()->route('post.index');
     }
 
     /**
@@ -163,48 +161,39 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->delete();
-        return redirect()->route('post.index')->with('message', 'success delete');
+        flashy('Votre post à bien été supprimer!');
+        return redirect()->route('post.index');
     }
     
     public function deleteMultiple(Request $request)
     {
         $ids = $request->input('ids');
-
-        // var_dump("Post.deleteMultiple()", $ids);
-        // exit();
-
         $post = Post::whereIn('id', $ids);
         $post->delete();
-        return redirect()->route('post.archiveList')->with('message', 'success delete');
+        flashy('Vos posts ons bien été supprimer!');
+        return redirect()->route('post.archiveList');
     }
 
     public function archiveMultiple(Request $request)
     {
         $archiveIds = $request->input('ids');
-
-        // var_dump("Post.archiveMultiple()", $archiveIds);
-        // exit();
-
-        // $posts = Post::pluck('id')->where('id', $ids);
         Post::whereIn('id', $archiveIds)
                 ->update(['status' => 'archived']);
-        // return view('post.archiveMultiple');
         flashy('Vos posts on bien été archivé!');
-        return redirect()->route('post.index')->with('message', 'archivage des posts');
+        return redirect()->route('post.index');
     }
 
     public function deleteSingle($id)
     {
         $post = Post::find($id);
         $post->delete();
-        return redirect()->back()->with('message', 'success delete');
+        flashy('Votre post à bien été supprimer!');
+        return redirect()->back();
     }
 
     public function showArchive()
     {
         $posts = Post::archived()->where('status', 'archived')->with('picture', 'category')->paginate(10);
-        // var_dump( $posts);
-        // exit();
         return view('back.post.archive', ['posts' => $posts]);
     }
 }
