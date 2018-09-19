@@ -8,6 +8,7 @@ use App\Picture;
 use App\category;
 use Carbon\Carbon;
 use Storage;
+use Route;
 
 class PostController extends Controller
 {
@@ -19,7 +20,7 @@ class PostController extends Controller
     public function index()
     {
         // return "dashboard";
-        $posts = Post::with('picture', 'category')->paginate(10);
+        $posts = Post::notArchived()->with('picture', 'category')->paginate(10);
         return view('back.post.index', ['posts' => $posts]);
     }
 
@@ -172,9 +173,9 @@ class PostController extends Controller
         // var_dump("Post.deleteMultiple()", $ids);
         // exit();
 
-        $post = Post::where('id', $ids);
+        $post = Post::whereIn('id', $ids);
         $post->delete();
-        return redirect()->route('post.index')->with('message', 'success delete');
+        return redirect()->route('post.archiveList')->with('message', 'success delete');
     }
 
     public function archiveMultiple(Request $request)
@@ -186,8 +187,9 @@ class PostController extends Controller
 
         // $posts = Post::pluck('id')->where('id', $ids);
         Post::whereIn('id', $archiveIds)
-                ->update(['status' => 'destroying']);
+                ->update(['status' => 'archived']);
         // return view('post.archiveMultiple');
+        flashy('Vos posts on bien été archivé!');
         return redirect()->route('post.index')->with('message', 'archivage des posts');
     }
 
@@ -195,6 +197,14 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->delete();
-        return redirect()->route('post.index')->with('message', 'success delete');
+        return redirect()->back()->with('message', 'success delete');
+    }
+
+    public function showArchive()
+    {
+        $posts = Post::archived()->where('status', 'archived')->with('picture', 'category')->paginate(10);
+        // var_dump( $posts);
+        // exit();
+        return view('back.post.archive', ['posts' => $posts]);
     }
 }

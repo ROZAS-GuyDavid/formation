@@ -19,6 +19,12 @@
                         <a class="nav-link" href="{{route('contact')}}">Contact</a>
                     </li>
                 @endif
+                
+                @if(Route::is('post.*') == true)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('post.archiveList')}}">Archive</a>
+                </li> 
+                @endif
             </ul>
             @if(Route::is('post.*') == false)
                 <form class="form-inline my-2 my-lg-0"  action="{{ route('search') }}" method="get">

@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->dateTime('date_end')->nullable();
             $table->unsignedDecimal('price', 7, 2)->nullable();
             $table->unsignedInteger('max_stud')->nullable();
-            $table->enum('status', ['published', 'unpublished', 'destroying'])->default('unpublished');
+            $table->enum('status', ['published', 'unpublished', 'archived'])->default('unpublished');
             $table->timestamps();
         });
     }

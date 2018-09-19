@@ -40,4 +40,10 @@ class Post extends Model
     public function scopePublished($query){
         return $query->where('status', 'published');
     }
+    public function scopeArchived($query){
+        return $query->where('status', 'archived');
+    }
+    public function scopeNotArchived($query){
+        return $query->where('status', '!=', 'archived');
+    }
 }

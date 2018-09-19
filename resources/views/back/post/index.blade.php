@@ -35,7 +35,7 @@
                         <td>
                             @if($post->status == 'published')
                             <button type="button" class="btn btn-success">published</button>
-                            @elseif($post->status == 'destroying')
+                            @elseif($post->status == 'archived')
                             <button type="button" class="btn btn-default">archived</button>
                             @else
                             <button type="button" class="btn btn-warning">unpublished</button>
@@ -45,7 +45,7 @@
                             <a href="{{route('post.show', $post->id)}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true">eye-open</span></a>
                         </td>
                         <td>
-                            <a href="{{route('post.edit', $post->id)}}"><i class="far fa-edit">edit</i></a>
+                            <a href="{{route('post.edit', $post->id)}}"><i class="fa fa-edit">edit</i></a>
                         </td>
                         <td>
                             {{-- <form class="delete" method="POST" action="{{route('post.destroy', $post->id)}}">
