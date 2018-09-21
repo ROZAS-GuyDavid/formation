@@ -10477,3 +10477,12 @@ a.text-dark:focus {
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+/*! Mon CSS */
+
+.m-b05 {
+  margin-bottom: 0.5rem;
+}
+
+img#preview{
+  width: 50%;
+}

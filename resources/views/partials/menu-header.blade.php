@@ -6,7 +6,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Accueil</a>
+                    <a class="nav-link" href="/"><i class="fas fa-home"></i> Accueil</a>
                 </li>
                 @if(Route::is('post.*') == false)
                     <li class="nav-item">
@@ -22,7 +22,7 @@
                 
                 @if(Route::is('post.*') == true)
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('post.archiveList')}}">Archive</a>
+                    <a class="nav-link" href="{{route('post.archiveList')}}"><i class="fas fa-archive"></i> Archive</a>
                 </li> 
                 @endif
             </ul>
@@ -37,11 +37,11 @@
                 
                 @else
                     <li class="nav-item ml-auto">
-                        <a class="nav-link" href="{{ route('post.index') }}">{{ __('Dashboard') }}</a>
+                        <a class="nav-link" href="{{ route('post.index') }}"><i class="fas fa-columns"></i> {{ __('Dashboard') }}</a>
                     </li>
                     <li class="nav-item dropdown ml-auto">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            <i class="fas fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

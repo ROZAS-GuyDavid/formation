@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+<h1 class="text-center my-4">Archives</h1>
     {{$posts->links()}}
     @include('back.post.partials.flash')
     <form action="{{route('deleteMultiple')}}" method="POST">    
@@ -19,7 +20,7 @@
                     <th>Edit</th>
                     <th>Delete</th>
                     <!-- <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button></th> -->
-                    <th><button type="submit" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove">Delete selected</i></button></th>
+                    <th><button type="submit" class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i> Delete selected</button></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,27 +34,27 @@
                         <td>{{$post->price}}</td>
                         <td>
                             @if($post->status == 'published')
-                            <button type="button" class="btn btn-success">published</button>
+                            <button type="button" class="btn btn-success w-100">published</button>
                             @elseif($post->status == 'archived')
-                            <button type="button" class="btn btn-default">archived</button>
+                            <button type="button" class="btn btn-default w-100">archived</button>
                             @else
-                            <button type="button" class="btn btn-warning">unpublished</button>
+                            <button type="button" class="btn btn-warning w-100">unpublished</button>
                             @endif
                         </td>
                         <td>
-                            <a href="{{route('post.show', $post->id)}}"><span class="glyphicon glyphicon-eye-open" aria-hidden="true">eye-open</span></a>
+                            <a href="{{route('post.show', $post->id)}}"  class=" d-block text-center"><i class="far fa-eye"></i></a>
                         </td>
                         <td>
-                            <a href="{{route('post.edit', $post->id)}}"><i class="far fa-edit">edit</i></a>
+                            <a href="{{route('post.edit', $post->id)}}"  class=" d-block text-center"><i class="far fa-edit"></i></a>
                         </td>
                         <td>
                             {{-- <form class="delete" method="POST" action="{{route('post.destroy', $post->id)}}">
                                 {{ method_field('DELETE') }}
                                 {{ csrf_field() }}
                             </form> --}}
-                            <a href="{{route('deleteSingle', $post->id)}}" class="btn btn-danger">delete</a>
+                            <a href="{{route('deleteSingle', $post->id)}}" class=" d-block text-center"><i class="text-danger far fa-trash-alt"></i></a>
                         </td>
-                        <td>
+                        <td class=" d-block text-center">
                             <input type="checkbox" name="ids[]" value="{{$post->id}}">
                         </td>
 
