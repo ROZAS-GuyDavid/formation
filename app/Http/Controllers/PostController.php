@@ -190,6 +190,21 @@ class PostController extends Controller
         flashy('Votre post à bien été supprimer!');
         return redirect()->back();
     }
+    
+    public function archiveSingle($id)
+    {
+        $post = Post::find($id);
+        $post->update(['status' => 'archived']);
+        flashy('Votre post à bien été archivé!');
+        return redirect()->back();
+    }
+    public function unArchiveSingle($id)
+    {
+        $post = Post::find($id);
+        $post->update(['status' => 'unpublished']);
+        flashy('Votre post à bien été désarchivé!');
+        return redirect()->back();
+    }
 
     public function showArchive()
     {

@@ -19,8 +19,7 @@
                     <th>Status</th>
                     <th>Show</th>
                     <th>Edit</th>
-                    <th>Delete</th>
-                    <!-- <th><button type="button" name="bulk_delete" id="bulk_delete" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-remove"></i></button></th> -->
+                    <th>Archive</th>
                     <th><button type="submit" class="btn btn-warning btn-xs"><i class="fas fa-archive"></i> Archive selected</button></th>
                 </tr>
             </thead>
@@ -33,27 +32,21 @@
                         <td>{{$post->date_begin}}</td>
                         <td>{{$post->date_end}}</td>
                         <td>{{$post->price}}</td>
-                        <td>
+                        <td class="text-center">
                             @if($post->status == 'published')
-                            <button type="button" class="btn btn-success w-100">published</button>
-                            @elseif($post->status == 'archived')
-                            <button type="button" class="btn btn-default w-100">archived</button>
-                            @else
-                            <button type="button" class="btn btn-warning w-100">unpublished</button>
+                            <span class="badge badge-success">published</span>
+                            @elseif($post->status == 'unpublished')
+                            <span class="badge badge-secondary">unpublished</span>
                             @endif
                         </td>
-                        <td>
-                            <a href="{{route('post.show', $post->id)}}" class=" d-block text-center"><i class="far fa-eye"></i></a>
+                        <td class="text-center">
+                            <a href="{{route('post.show', $post->id)}}" class="btn btn-info"><i class="far fa-eye"></i></a>
                         </td>
-                        <td>
-                            <a href="{{route('post.edit', $post->id)}}" class=" d-block text-center"><i class="far fa-edit"></i></a>
+                        <td class="text-center">
+                            <a href="{{route('post.edit', $post->id)}}" class="btn btn-success"><i class="far fa-edit"></i></a>
                         </td>
-                        <td>
-                            {{-- <form class="delete" method="POST" action="{{route('post.destroy', $post->id)}}">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                            </form> --}}
-                            <a href="{{route('deleteSingle', $post->id)}}" class=" d-block text-center"><i class="text-danger far fa-trash-alt"></i></a>
+                        <td class="text-center">
+                            <a href="{{route('archiveSingle', $post->id)}}" class="btn btn-warning"><i class="fas fa-archive"></i></a>
                         </td>
                         <td class=" d-block text-center">
                             <input type="checkbox" name="ids[]" value="{{$post->id}}">
