@@ -21,7 +21,6 @@ class Post extends Model
         return $this->hasOne(Picture::class);
     }
 
-    // date_begin 
     public function getDateBeginAttribute($value)
     {
         return Carbon::parse($value)->format('d-m-Y');
@@ -36,6 +35,9 @@ class Post extends Model
         $now = Carbon::now();
 
         return $query->where('date_begin', '>', $now)->orderBy('date_begin', 'ASC');
+    }
+    public function scopeOrderByCreatedAt($query){
+         return $query->orderBy('created_at', 'DESC');
     }
     public function scopePublished($query){
         return $query->where('status', 'published');

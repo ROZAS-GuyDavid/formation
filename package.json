@@ -19,9 +19,9 @@
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
         "popper.js": "^1.12",
-        "vue": "^2.5.7"
+        "vue": "^2.5.7",
+        "maildev": "^1.0.0-rc2"
     },
     "dependencies": {
-        "glyphicons": "^0.2.0"
     }
 }

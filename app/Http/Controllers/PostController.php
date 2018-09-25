@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index()
     {
         // return "dashboard";
-        $posts = Post::notArchived()->with('picture', 'category')->paginate(10);
+        $posts = Post::notArchived()->orderByCreatedAt()->with('picture', 'category')->paginate(10);
         return view('back.post.index', ['posts' => $posts]);
     }
 
