@@ -22,10 +22,10 @@
             <tbody>
                 @forelse($posts as $post)
                     <tr>
-                        <td><a href="{{route('post.edit', $post->id)}}">{{$post->title}}</a></td>
+                        <td><a href="{{route('post.show', $post->id)}}">{{$post->title}}</a></td>
                         <td>{{$post->post_type}}</td>
                         <td>{{$post->created_at}}</td>
-                        <td>{{$post->price}}</td>
+                        <td>{{$post->price}} €</td>
                         <td class="text-center">
                             <a href="{{route('unArchiveSingle', $post->id)}}" class="btn btn-warning"><i class="fas fa-archive"></i></a>
                         </td>

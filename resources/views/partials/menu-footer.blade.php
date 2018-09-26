@@ -6,7 +6,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Accueil</a>
+                    <a class="nav-link" href="/">{{ config('app.name', 'DevsJob') }}</a>
                 </li>
                 @if(Route::is('post.*') == false)
                     <li class="nav-item">
@@ -18,6 +18,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('contact')}}">Contact</a>
                     </li>
+                @endif
+
+                @if(Route::is('post.*') == true)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('post.archiveList')}}"><i class="fas fa-archive"></i> Archive</a>
+                </li> 
                 @endif
             </ul>
         </div>

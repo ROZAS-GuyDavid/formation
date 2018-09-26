@@ -10486,3 +10486,9 @@ a.text-dark:focus {
 img#preview{
   width: 50%;
 }
+#img-show{
+  margin-top: -25%;
+}
+#img-container{
+  overflow: hidden;
+}

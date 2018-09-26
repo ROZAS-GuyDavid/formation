@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<h1 class="text-center my-4">Formation/stage</h1>
+<h1 class="text-center my-4">Formation / Stage</h1>
 
 <div class="row d-flex justify-content-around">
     @forelse($posts as $post)
