@@ -9,17 +9,14 @@
             {!! csrf_field() !!}
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>type de post</th>
+                    <th>Titre</th>
+                    <th>Type de poste</th>
                     <th>Date de publication</th>
-                    <th>Date de debut</th>
-                    <th>Date de fin</th>
-                    <th>prix</th>
-                    <th>Unarchive</th>
-                    <th>Show</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                    <th><button type="submit" class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i> Delete selected</button></th>
+                    <th>Prix</th>
+                    <th>Désarchiver</th>
+                    <th>Editer</th>
+                    <th>supprimer</th>
+                    <th><button type="submit" class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i> Supprimer en trie par lot >></button></th>
                 </tr>
             </thead>
             <tbody>
@@ -28,14 +25,9 @@
                         <td><a href="{{route('post.edit', $post->id)}}">{{$post->title}}</a></td>
                         <td>{{$post->post_type}}</td>
                         <td>{{$post->created_at}}</td>
-                        <td>{{$post->date_begin}}</td>
-                        <td>{{$post->date_end}}</td>
                         <td>{{$post->price}}</td>
                         <td class="text-center">
                             <a href="{{route('unArchiveSingle', $post->id)}}" class="btn btn-warning"><i class="fas fa-archive"></i></a>
-                        </td>
-                        <td class="text-center">
-                            <a href="{{route('post.show', $post->id)}}" class="btn btn-info"><i class="far fa-eye"></i></a>
                         </td>
                         <td class="text-center">
                             <a href="{{route('post.edit', $post->id)}}" class="btn btn-success"><i class="far fa-edit"></i></a>
@@ -49,7 +41,7 @@
 
                     </tr>
                 @empty
-                    aucun post ...
+                    Vous n'avez aucun poste archivé...
                 @endforelse
             </tbody>
         </table>

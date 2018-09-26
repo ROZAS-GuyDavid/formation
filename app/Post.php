@@ -30,6 +30,10 @@ class Post extends Model
     {
         return Carbon::parse($value)->format('d-m-Y');
     }
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('d-m-Y');
+    }
 
     public function scopeFuturFormationStage($query){
         $now = Carbon::now();

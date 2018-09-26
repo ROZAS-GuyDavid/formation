@@ -4,23 +4,20 @@
 <h1 class="text-center my-4">Les posts</h1>
     {{$posts->links()}}
     @include('back.post.partials.flash')
-    <a href="{{route('post.create')}}"><button type="button" class="btn btn-info">créez un post</button></a>
+    <a href="{{route('post.create')}}"><button type="button" class="btn btn-info">créez un poste</button></a>
     <form action="{{route('archiveMultiple')}}" method="POST">    
         <table class="table table-striped">
             {!! csrf_field() !!}
             <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>type de post</th>
+                    <th>Titre</th>
+                    <th>Type de poste</th>
                     <th>Date de publication</th>
-                    <th>Date de debut</th>
-                    <th>Date de fin</th>
-                    <th>prix</th>
-                    <th>Status</th>
-                    <th>Show</th>
-                    <th>Edit</th>
-                    <th>Archive</th>
-                    <th><button type="submit" class="btn btn-warning btn-xs"><i class="fas fa-archive"></i> Archive selected</button></th>
+                    <th>Prix</th>
+                    <th>Statut</th>
+                    <th>Editer</th>
+                    <th>Archiver</th>
+                    <th><button type="submit" class="btn btn-warning btn-xs"><i class="fas fa-archive"></i> Archiver en trie par lot >></button></th>
                 </tr>
             </thead>
             <tbody>
@@ -29,8 +26,6 @@
                         <td><a href="{{route('post.edit', $post->id)}}">{{$post->title}}</a></td>
                         <td>{{$post->post_type}}</td>
                         <td>{{$post->created_at}}</td>
-                        <td>{{$post->date_begin}}</td>
-                        <td>{{$post->date_end}}</td>
                         <td>{{$post->price}}</td>
                         <td class="text-center">
                             @if($post->status == 'published')
@@ -38,9 +33,6 @@
                             @elseif($post->status == 'unpublished')
                             <span class="badge badge-secondary">unpublished</span>
                             @endif
-                        </td>
-                        <td class="text-center">
-                            <a href="{{route('post.show', $post->id)}}" class="btn btn-info"><i class="far fa-eye"></i></a>
                         </td>
                         <td class="text-center">
                             <a href="{{route('post.edit', $post->id)}}" class="btn btn-success"><i class="far fa-edit"></i></a>
@@ -54,7 +46,7 @@
 
                     </tr>
                 @empty
-                    aucun post ...
+                    Commencer par créer un poste ...
                 @endforelse
             </tbody>
         </table>
