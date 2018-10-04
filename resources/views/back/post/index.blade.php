@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<h1 class="text-center my-4">Les posts</h1>
+<h1 class="text-center my-4 animated fadeIn delay2">Les posts</h1>
     {{$posts->links()}}
     @include('back.post.partials.flash')
     <a href="{{route('post.create')}}"><button type="button" class="btn btn-info">créez un poste</button></a>
@@ -21,33 +21,35 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($posts as $post)
-                    <tr>
-                        <td><a href="{{route('post.show', $post->id)}}">{{$post->title}}</a></td>
-                        <td>{{$post->post_type}}</td>
-                        <td>{{$post->created_at}}</td>
-                        <td>{{$post->price}} €</td>
-                        <td class="text-center">
-                            @if($post->status == 'published')
-                            <span class="badge badge-success">published</span>
-                            @elseif($post->status == 'unpublished')
-                            <span class="badge badge-secondary">unpublished</span>
-                            @endif
-                        </td>
-                        <td class="text-center">
-                            <a href="{{route('post.edit', $post->id)}}" class="btn btn-success"><i class="far fa-edit"></i></a>
-                        </td>
-                        <td class="text-center">
-                            <a href="{{route('archiveSingle', $post->id)}}" class="btn btn-warning"><i class="fas fa-archive"></i></a>
-                        </td>
-                        <td class=" d-block text-center">
-                            <input type="checkbox" name="ids[]" value="{{$post->id}}">
-                        </td>
+                @if (count($posts) > 0)
+                    @foreach($posts as $post)
+                        <tr class="fadeInUp post post{{$loop->iteration}}">
+                            <td><a href="{{route('post.show', $post->id)}}">{{$post->title}}</a></td>
+                            <td>{{$post->post_type}}</td>
+                            <td>{{$post->created_at}}</td>
+                            <td>{{$post->price}} €</td>
+                            <td class="text-center">
+                                @if($post->status == 'published')
+                                <span class="badge badge-success">published</span>
+                                @elseif($post->status == 'unpublished')
+                                <span class="badge badge-secondary">unpublished</span>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                <a href="{{route('post.edit', $post->id)}}" class="btn btn-success"><i class="far fa-edit"></i></a>
+                            </td>
+                            <td class="text-center">
+                                <a href="{{route('archiveSingle', $post->id)}}" class="btn btn-warning"><i class="fas fa-archive"></i></a>
+                            </td>
+                            <td class=" d-block text-center">
+                                <input type="checkbox" name="ids[]" value="{{$post->id}}">
+                            </td>
 
-                    </tr>
-                @empty
+                        </tr>
+                    @endforeach
+                @else
                     Commencer par créer un poste ...
-                @endforelse
+                @endif
             </tbody>
         </table>
     </form>
@@ -56,4 +58,6 @@
 @section('scripts')
     @parent
     <script src="{{asset('js/confirm.js')}}"></script>
+    <script src="{{asset('js/animeIndex.js')}}"></script>
+    <script src="{{asset('js/animeFadeIn.js')}}"></script>
 @endsection

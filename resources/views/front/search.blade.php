@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<h1 class="text-center my-4">resultat(s) de recherche pour "{{$query}}"</h1>
+<h1 class="text-center my-4 animated fadeIn delay2">resultat(s) de recherche pour "{{$query}}"</h1>
 {{$posts->links()}}
 
 <div class="row d-flex justify-content-around">

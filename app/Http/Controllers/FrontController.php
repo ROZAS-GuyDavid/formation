@@ -24,7 +24,7 @@ class FrontController extends Controller
 
     public function showStage(){
         $posts = Post::published()->where('post_type' , 'stage')->with('picture','category')->get();
-
+        // sleep (1);
         return view('front.stage', ['posts' => $posts]); 
     }
 

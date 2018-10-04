@@ -18,10 +18,13 @@
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
-        "popper.js": "^1.12",
-        "vue": "^2.5.7",
-        "maildev": "^1.0.0-rc2"
+        "popper.js": "^1.12"
     },
     "dependencies": {
+        "ajv": "^6.5.4",
+        "animate.css": "^3.7.0",
+        "img-loader": "^3.0.0",
+        "maildev": "^1.0.0-rc2",
+        "vue": "^2.5.7"
     }
 }

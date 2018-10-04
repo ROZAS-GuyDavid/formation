@@ -3,9 +3,9 @@
 @section('content')
     <div class="container">
         <form action="{{route('post.update', $post->id)}}" method="post" enctype="multipart/form-data">
-        <h1 class="text-center my-4">Editez un poste</h1>
+        <h1 class="text-center my-4 animated fadeIn delay2">Editez un poste</h1>
             <div class="row">
-                <div class="col-md-6 mr-auto">
+                <div class="col-md-6 mr-auto animated fadeInDown delay1">
                     @csrf
                     {{method_field('PUT')}}
                     <div class="form-group">
@@ -85,7 +85,7 @@
                         </div>
                     </div>
             </div>
-            <div class="col-md-5 col-auto">
+            <div class="col-md-5 col-auto animated fadeInDown delay2">
                 <div class="form-group">
                     <p class="m-b05">Statut :</p>    
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">

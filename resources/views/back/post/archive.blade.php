@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<h1 class="text-center my-4">Archives</h1>
+<h1 class="text-center my-4 animated fadeIn delay2">Archives</h1>
     {{$posts->links()}}
     @include('back.post.partials.flash')
     <form action="{{route('deleteMultiple')}}" method="POST" id="formDeleteMultiple">    
@@ -20,29 +20,32 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($posts as $post)
-                    <tr>
-                        <td><a href="{{route('post.show', $post->id)}}">{{$post->title}}</a></td>
-                        <td>{{$post->post_type}}</td>
-                        <td>{{$post->created_at}}</td>
-                        <td>{{$post->price}} €</td>
-                        <td class="text-center">
-                            <a href="{{route('unArchiveSingle', $post->id)}}" class="btn btn-warning"><i class="fas fa-archive"></i></a>
-                        </td>
-                        <td class="text-center">
-                            <a href="{{route('post.edit', $post->id)}}" class="btn btn-success"><i class="far fa-edit"></i></a>
-                        </td>
-                        <td class="text-center">
-                            <a href="{{route('deleteSingle', $post->id)}}" class="btn btn-danger btn-delete"><i class="fas fa-trash-alt"></i></a>
-                        </td>
-                        <td class=" d-block text-center">
-                            <input type="checkbox" name="ids[]" value="{{$post->id}}">
-                        </td>
+                
+                @if (count($posts) > 0)
+                    @foreach($posts as $post)
+                        <tr class="fadeInUp post post{{$loop->iteration}}">
+                            <td><a href="{{route('post.show', $post->id)}}">{{$post->title}}</a></td>
+                            <td>{{$post->post_type}}</td>
+                            <td>{{$post->created_at}}</td>
+                            <td>{{$post->price}} €</td>
+                            <td class="text-center">
+                                <a href="{{route('unArchiveSingle', $post->id)}}" class="btn btn-warning"><i class="fas fa-archive"></i></a>
+                            </td>
+                            <td class="text-center">
+                                <a href="{{route('post.edit', $post->id)}}" class="btn btn-success"><i class="far fa-edit"></i></a>
+                            </td>
+                            <td class="text-center">
+                                <a href="{{route('deleteSingle', $post->id)}}" class="btn btn-danger btn-delete"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                            <td class=" d-block text-center">
+                                <input type="checkbox" name="ids[]" value="{{$post->id}}">
+                            </td>
 
-                    </tr>
-                @empty
+                        </tr>
+                    @endforeach
+                @else
                     Vous n'avez aucun poste archivé...
-                @endforelse
+                @endif
             </tbody>
         </table>
     </form>
@@ -51,4 +54,5 @@
 @section('scripts')
     @parent
     <script src="{{asset('js/confirm.js')}}"></script>
+    <script src="{{asset('js/animeFadeIn.js')}}"></script>
 @endsection

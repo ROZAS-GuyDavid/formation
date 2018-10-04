@@ -10492,3 +10492,11 @@ img#preview{
 #img-container{
   overflow: hidden;
 }
+.delay1 {
+  animation-duration: 1.5s;
+  animation-delay: 1s;
+}
+.delay2 {
+  animation-duration: 2s;
+  animation-delay: 1.5s;
+}

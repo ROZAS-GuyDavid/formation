@@ -3,9 +3,9 @@
 @section('content')
     <div class="container">
         <form action="{{route('post.store')}}" method="post" enctype="multipart/form-data">
-        <h1 class="text-center my-4">Créez un poste</h1>
+        <h1 class="text-center my-4 animated fadeIn delay2">Créez un poste</h1>
             <div class="row">
-                <div class="col-md-6 mr-auto">
+                <div class="col-md-6 mr-auto animated fadeInDown delay1">
                     @csrf
                     <div class="form-group">
                         <label for="title">Titre :</label>
@@ -84,7 +84,7 @@
                         </div>
                     </div>
             </div>
-            <div class="col-md-5 col-auto">  
+            <div class="col-md-5 col-auto animated fadeInDown delay2">  
                 <div class="form-group">
                     <p class="m-b05">Statut :</p>    
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
